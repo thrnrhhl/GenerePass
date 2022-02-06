@@ -3,10 +3,10 @@ function App() {
   const [filter, setFilter] = React.useState([false, false, false]);
   const [generePass, setGenerePass] = React.useState([]);
   const messages = [
-    "Пароль скопирован в буфер обмена",
-    "Пароль успешно сохранен",
-    "Максимальная длина пароля 1000",
-    "Выберите фильтры",
+    "The password has been copied to the clipboard",
+    "Password saved successfully",
+    "The maximum password length is 1000",
+    "Select filters",
   ];
   const [message, setMessage] = React.useState(messages[0]);
   const [mesStatus, setMesStatus] = React.useState(0)
@@ -34,7 +34,7 @@ function App() {
       return bool === true;
     };
     if (event.keyCode === 13) {
-      if (filter.some(even) && value.length !== 0) {
+      if (filter.some(even)) {
           console.log(value.length);
         generate();
       } else {
