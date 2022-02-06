@@ -34,7 +34,7 @@ function App() {
       return bool === true;
     };
     if (event.keyCode === 13) {
-      if (filter.some(even)) {
+      if (filter.some(even) && value !== "") {
           console.log(value.length);
         generate();
       } else {
