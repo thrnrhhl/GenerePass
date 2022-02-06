@@ -117,7 +117,7 @@ function App() {
           let blob = new Blob([str], { type: "text/plain" });
           let link = document.createElement("a");
           link.href = URL.createObjectURL(blob);
-          link.download = "GenerePass_" + Date.now() + ".text";
+          link.download = "GenerePass_" + Date.now() + ".txt";
           link.click();
         },
       },
