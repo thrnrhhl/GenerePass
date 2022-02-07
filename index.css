@@ -285,6 +285,3 @@
   color: #272727;
   margin-top: 10px;
 }
-.app-password-input::before {
-  content: "Input numbers: ";
-}
