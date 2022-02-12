@@ -19,7 +19,7 @@ function App() {
   ];
   // Checking window "px" for style
   const innerWidth =
-    window.innerWidth < 500 ? ["100%", "190%"] : ["100%", "1000%"];
+    window.innerWidth < 500 ? ["190%", "500%"] : ["100%", "1000%"];
   // Hooks for message
   const [message, setMessage] = React.useState(messages[0]);
   // Hooks for message status output or not
