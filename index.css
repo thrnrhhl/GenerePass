@@ -48,10 +48,13 @@ body,
 
 .wrapper {
   width: 400px;
-  margin-top: 11%;
-  display: block;
-margin-left: auto;
-margin-right: auto;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
 }
 
 .button {
@@ -355,7 +358,6 @@ margin-right: auto;
   -webkit-transition: 1s;
   -o-transition: 1s;
   transition: 1s;
-  overflow: hidden;
 }
 .modal-body {
   background-color: #fff;
