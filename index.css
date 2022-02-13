@@ -382,7 +382,8 @@ body,
 .list-save-password {
   margin-top:10px;
   overflow: auto;
-  height: 100%;
+  height: 95%;
+  margin: 10px;
 }
 .list-save-password__item {
   padding: 5px;
@@ -430,6 +431,7 @@ body,
       -ms-flex-direction: column;
           flex-direction: column;
   height: 100%;
+  margin: 15px;
 }
 .form-save__text {
   font-weight: 900;
@@ -438,7 +440,7 @@ body,
   color: #272727;
 }
 .form-save__input {
-    height: 25%;
+    height: 50%;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -494,33 +496,20 @@ body,
     margin-right: 5px;
     color: #06d;
 }
-@media only screen and (max-width: 415px) {
-  .wrapper {
-    width: 350px;
-  }
-  .modal {
-    -webkit-box-align: end;
-        -ms-flex-align: end;
-            align-items: auto;
-    background-color: rgba(0,0,0, 0);
-    -webkit-transition: 1s;
-    -o-transition: 1s;
+.panel {
+    z-index: 3;
+    background: #fff;
+    position: absolute;
+    bottom: 0;
+    box-shadow: 0 0 1.5rem rgb(0 0 0 / 30%);
+    height: 40%;
     transition: 1s;
-  }
-  .modal-body {
-    width: 100%;
-    height: 44%;
-    padding: 15px;
-    -webkit-box-shadow: 0 0 1.5rem rgb(0 0 0 / 30%);
-            box-shadow: 0 0 1.5rem rgb(0 0 0 / 30%);
-  }
-  .message {
-    width: 200px;
-  }
-  .form-save__button button {
-    font-size: 20px;
-  }
+    width: 400px;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
 }
+
 
 @media only screen and (max-width: 380px) { 
   .wrapper {
@@ -582,5 +571,95 @@ body,
   }
   .form-save__input {
     height: 20%;
+  }
+}
+
+
+
+
+
+/* Iphone 7 */
+@media only screen and (min-width: 375px) and (max-width: 413px) {
+  .head-logo {
+    width: 100px;
+  }
+  .filter-block-row__item {
+    width: 90px;
+    height: 30px;
+  }
+  .letter {
+    left: -3px;
+    top: -17px;
+  }
+  .number {
+    left: -9px;
+    top: -17px;
+  }
+  .symbols {
+    left: -20px;
+    top: -17px;
+  }
+  .filter-block-row {
+    margin-bottom: 30px;
+  }
+  .description {
+    margin-top: 0;
+  }
+  .generation__item-pass {
+    padding: 6px 8px;
+  }
+  .message {
+    width: 250px;
+    font-size: 12px;
+  }
+  .form-save__input {
+    height: 37px;
+  }
+  .form-save__input {
+    height: 35%;
+  }
+  .panel {
+    z-index: 3;
+    background: #fff;
+    position: absolute;
+    top: 80%;
+    box-shadow: 0 0 1.5rem rgb(0 0 0 / 30%);
+    height: 40%;
+    transition: 1s;
+    width: 100%;
+}
+}
+
+@media only screen and (min-width: 414px) and (max-width: 500px) { 
+  .wrapper {
+    width: 350px;
+  }
+  .head-logo {
+    width: 110px;
+  }
+  .filter-block-row {
+    margin-bottom: 35px;
+  }
+  .filter-block-row__item {
+    width: 100px;
+    height: 35px;
+  }
+  .filter-block-row__item-text {
+    font-size: 30px;
+  }
+  .letter {
+    left: -4px;
+    top: -19px;
+  }
+  .number {
+    left: -12px;
+    top: -19px;
+  }
+  .symbols {
+    left: -25px;
+    top: -19px;
+  }
+  .generation__item-pass {
+    padding: 9px 8px;
   }
 }
