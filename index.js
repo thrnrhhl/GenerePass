@@ -16,6 +16,7 @@ function App() {
     "Пароль успешно сохранен",
     "Максимальная длина пароля 1000",
     "Выберите фильтры",
+    "Пароль удален"
   ];
   // Checking window "px" for style
   const innerWidth =
@@ -36,6 +37,7 @@ function App() {
   // Ref fro modal block
   const modal = React.createRef();
   const wrapper = React.createRef();
+  const upload = React.createRef();
   // Object for symbols
   const symbols = {
     0: "0123456789",
@@ -103,6 +105,30 @@ function App() {
     setMessage(messages[0]);
     setMesStatus(1);
     setTimeout(() => setMesStatus(0), 1000);
+  };
+
+  const handleDelete = (name) => {
+    modal.current.setAttribute(
+      "style",
+      `height: ${innerWidth[1]}; z-index: 0; opacity: 0`
+    );
+    IndexedDB({
+      settings: SETTINGS,
+      type: "deleteNote",
+      item: name,
+      callback: {
+        ondelete: (e) => {
+          console.log(e);
+          if (e.readyState === "done") {
+            setMessage(messages[4]);
+            setMesStatus(1);
+            
+            setTimeout(() => setMesStatus(0), 1000);
+            
+          }
+        },
+      },
+    });
   };
   // When you click on the asterisk, a modal window appears to save the password
   const handlePrePass = (pass) => {
@@ -219,9 +245,8 @@ function App() {
             {key.name}
           </div>
           <div className={"list-save-password__item-block__button"}>
-            <button onClick={handlyCopy.bind(this, key.password)}>
-              Копировать
-            </button>
+            <button onClick={handlyCopy.bind(this, key.password)}>Копировать</button>
+            <button onClick={handleDelete.bind(this, key.name)}>Удалить</button>
           </div>
         </div>
       </div>
@@ -256,7 +281,7 @@ function App() {
           <img className={"folder"} src="Folder-b.svg" onClick={() => handleShowModal()} />
         </div>
         <div class="menu__item">
-          <img src="Cloud-b.svg" width="40" onClick={() => handleDownload()} />
+          <img src="ArrowBottom.svg" width="40" onClick={() => handleDownload()} />
         </div>
       </div>
 
