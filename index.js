@@ -19,7 +19,8 @@ function App() {
   ];
   // Checking window "px" for style
   const innerWidth =
-    window.innerWidth < 500 ? ["190%", "500%"] : ["100%", "1000%"];
+    window.innerWidth < 500 ? ["40%", "0%", "", ""] : ["40%", "0%", "50%", "500px"];
+    console.log(innerWidth);
   // Hooks for message
   const [message, setMessage] = React.useState(messages[0]);
   // Hooks for message status output or not
@@ -34,6 +35,7 @@ function App() {
   const [data, setData] = React.useState([]);
   // Ref fro modal block
   const modal = React.createRef();
+  const wrapper = React.createRef();
   // Object for symbols
   const symbols = {
     0: "0123456789",
@@ -64,12 +66,26 @@ function App() {
   };
   // When you click outside the modal window, it is hidden
   document.addEventListener("click", (event) => {
-    if (event.target === modal.current) {
-      modal.current.setAttribute(
+    const block = document.querySelector(".panel");
+    const pathTarget = event.composedPath().includes(block);
+    if (
+      event.target.classList.contains("list-save-password") ||
+      event.target.classList.contains("folder") ||
+      event.target.classList.contains("generation__item-span__star")
+    ) {
+      modal.current !== null && modal.current.setAttribute(
         "style",
-        `height: ${innerWidth[1]}; z-index: 0`
+        `height: ${innerWidth[0]}; z-index: 3; opacity: 1`
+      );
+    } else if (!pathTarget) {
+      modal.current !== null && modal.current.setAttribute(
+        "style",
+        `height: ${innerWidth[1]}; z-index: 0; opacity: 0`
       );
     }
+
+
+
   });
   // function for click or cancel filter
   const handleClickFilter = (id) => {
@@ -80,7 +96,10 @@ function App() {
   // Function for copy selection password
   const handlyCopy = (text) => {
     navigator.clipboard.writeText(text);
-    modal.current.setAttribute("style", `height: ${innerWidth[1]}; z-index: 0`);
+    modal.current.setAttribute(
+      "style",
+      `height: ${innerWidth[1]}; z-index: 0; opacity: 0`
+    );
     setMessage(messages[0]);
     setMesStatus(1);
     setTimeout(() => setMesStatus(0), 1000);
@@ -90,14 +109,17 @@ function App() {
     setPrePass(pass);
     setMessage(messages[1]);
     setForm("save");
-    modal.current.setAttribute("style", `height: ${innerWidth[0]}; z-index: 3`);
+    modal.current.setAttribute(
+      "style",
+      `height: ${innerWidth[0]}; z-index: 3;`
+    );
   };
   // A function for saving a password from being entered into the database
   const handleSave = (type) => {
     if (type === "save") {
       modal.current.setAttribute(
         "style",
-        `height: ${innerWidth[1]}; z-index: 0`
+        `height: ${innerWidth[1]}; z-index: 0; opacity: 0`
       );
       IndexedDB({
         settings: SETTINGS,
@@ -116,7 +138,7 @@ function App() {
     } else {
       modal.current.setAttribute(
         "style",
-        `height: ${innerWidth[1]}; z-index: 0`
+        `height: ${innerWidth[1]}; z-index: 0; opacity: 0`
       );
     }
   };
@@ -130,7 +152,10 @@ function App() {
       },
     });
     setForm("copy");
-    modal.current.setAttribute("style", `height: ${innerWidth[0]}; z-index: 3`);
+    modal.current.setAttribute(
+      "style",
+      `height: ${innerWidth[0]}; z-index: 3;`
+    );
   };
   // Function for saving previously saved passwords
   const handleDownload = () => {
@@ -180,7 +205,7 @@ function App() {
           {key}
         </div>
         <div className={"generation__item-span"}>
-          <div onClick={handlePrePass.bind(this, key)}>*</div>
+          <div className={"generation__item-span__star"} onClick={handlePrePass.bind(this, key)}>*</div>
         </div>
       </div>
     );
@@ -205,20 +230,17 @@ function App() {
   // Application rendering
   return (
     <>
-      {/* Модальное окно */}
-      <div ref={modal} className={"modal"} style={{ height: innerWidth[1] }}>
-        <div className={"modal-header"}></div>
-        <div className={"modal-body"}>
-          {form === "copy" ? (
-            <CopyPass len={divData.length} data={divData} />
-          ) : (
-            <SavePass
-              inputName={setPreName.bind(this)}
-              button={handleSave.bind(this)}
-            />
-          )}
-        </div>
+      <div class="panel" style={{ height: innerWidth[1] }} ref={modal}>
+        {form === "copy" ? (
+          <CopyPass len={divData.length} data={divData} />
+        ) : (
+          <SavePass
+            inputName={setPreName.bind(this)}
+            button={handleSave.bind(this)}
+          />
+        )}
       </div>
+      {/* Модальное окно */}
 
       {/* Блок для сообщения */}
       <div
@@ -231,14 +253,14 @@ function App() {
       {/* Кнопки сохранения пароля и скачивания */}
       <div class="menu">
         <div class="menu__item">
-          <img src="Folder-b.svg" onClick={() => handleShowModal()} />
+          <img className={"folder"} src="Folder-b.svg" onClick={() => handleShowModal()} />
         </div>
         <div class="menu__item">
           <img src="Cloud-b.svg" width="40" onClick={() => handleDownload()} />
         </div>
       </div>
 
-      <div class="wrapper">
+      <div class="wrapper" ref={wrapper}>
         <Header />
         <div class="filter">
           <div class="filter-block">
@@ -350,5 +372,7 @@ const SavePass = (props) => {
     </div>
   );
 };
+
+
 
 ReactDOM.render(<App />, document.getElementById("root"));
