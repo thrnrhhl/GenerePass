@@ -64,9 +64,11 @@ const IndexedDB = (props) => {
     const deleteNote = (props) => {
       let transaction = props.transaction(setting.store, "readwrite");
       let objectStore = transaction.objectStore(setting.store).delete(element);
-      console.log(1);
-      transaction.onsuccess = (e) => {
-        console.log(e.target);
+      objectStore.onsuccess = (e) => {
+        callback.ondelete(e.target);
+      };
+      objectStore.onerror = (e) => {
+        callback.ondelete(e.target);
       };
     };
   } catch (e) {
