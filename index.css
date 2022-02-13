@@ -340,7 +340,7 @@ body,
       -ms-transform: translate(-50%, 10px);
           transform: translate(-50%, 10px);
   left: 50%;
-  z-index: 1;
+  z-index: 3;
 }
 .modal {
   position: absolute;
@@ -390,9 +390,11 @@ body,
   border-bottom: 1px solid #ced4da;
 }
 .list-save-password__item-block {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  display: grid;
+  grid-template-columns: 44% 56%;
+}
+.list-save-password__item-block__button button:nth-child(2) {
+  margin-left: 5px;
 }
 .list-save-password__item-block__name {
   -webkit-box-flex: 1;
