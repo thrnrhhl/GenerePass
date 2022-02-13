@@ -57,7 +57,6 @@ function App() {
       return bool === true;
     };
     if (filter.some(even) === true && value !== "") {
-      console.log(value);
       generate();
     } else {
       setMessage(messages[3]);
