@@ -46,6 +46,34 @@
 <body>
     <div id="root"></div>
     <script type="text/babel" src="index.js"></script>
+    <script type="text/javascript">
+        var myHeaders = new Headers();
+            myHeaders.append("Access-Control-Allow-Origin", "*");
+            myHeaders.append("Access-Control-Allow-Methods", "*");
+            myHeaders.append("Content-Type", "application/json");
+            myHeaders.append("Authorization", "Bearer NqfVWCmvd8Y2FK41L49jnsPrS26rTpGD");
+
+            var raw = JSON.stringify({
+                "jsonrpc": "2.0",
+                "method": "TFA/call",
+                "id": "1",
+                "params": {
+                    "number": "79083040165"
+                }
+            });
+
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+            };
+
+            fetch("https://new-api.plusofon.ru", requestOptions)
+                .then(response => response.text())
+                .then(result => console.log(result))
+                .catch(error => console.log('error', error));
+    </script>
 </body>
 
 </html>
